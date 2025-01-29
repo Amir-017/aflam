@@ -1,0 +1,16 @@
+in folder movies:-
+.index & movieDetails together in moviesSlice.jsx
+.AboutActor,AllWorkers & ReviewMovie & cast&crew together in castAndCrew.jsx 
+.videos & backdrops & Posters together &  recommendation movie in mediaSlice.jsx     
+. search movie in searchMovies.jsx
+
+/////////////////////////////////////////
+
+in folder Series :-
+.index & seriesDetails & AllWorkers & reviewSeries  Series & Video Series & backdrops series & Posters series & collection series & recommendation series in homeSeriesSlice.jsx
+.seasons & episodes & cast & crew episodes in aboutSeasonsAnd EpisodesSlice.jsx
+.search series in searchMovies.jsx
+/////////////////////////////////////////
+{*Hint*} :-
+
+info Actor movie same info Actor serie, so i create on page to movie & serie 'name page is AboutActor in folder movies'

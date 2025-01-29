@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.show-more-less-clickable:hover {
+  cursor: pointer;
+}
+
+.show-more-less-clickable {
+  color: aqua;
+  text-decoration: underline;
+}
+
+.dell {
+  cursor: pointer !important;
+}
+
+.handlediv {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.slick-next {
+  right: 0px !important;
+}
+
+.slick-prev {
+  left: 0px !important;
+}
+
+.cardSe {
+  cursor: pointer !important;
+}
