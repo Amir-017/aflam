@@ -26,6 +26,11 @@ const CastAndCrewEpisode = () => {
   useEffect(() => {
     dispatch(getCastCrewEpisodes({ idseries, season_number, episodenum }));
     dispatch(getSeriesDetails(idseries));
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    window.scrollTo(0, 0);
   }, []);
   const backAstep = () => {
     navigate(-1);
@@ -84,136 +89,103 @@ const CastAndCrewEpisode = () => {
               </div>
             </div>
           </div>
-          <div className=" flex justify-between   container mx-auto mt-10 flex-col md:flex-row">
-            <div className="ms-10 flex flex-col justify-center items-center md:justify-start md:items-start">
-              <h1 className="text-3xl text-white container mx-auto py-5 font-bold text-center md:text-start ">
-                Cast :{" "}
-                <span className="text-[#0DCAF0] ">{cast && cast.length}</span>
+          <div className="flex flex-col md:flex-row gap-10 container mx-auto mt-10">
+            {/* Cast */}
+            <div className="w-full md:w-1/2 flex flex-col items-center">
+              <h1 className="text-3xl text-white py-5 font-bold text-center">
+                Cast:{" "}
+                <span className="text-[#0DCAF0]">{cast && cast.length}</span>
               </h1>
-              {cast &&
-                cast.map((actor, i) => (
-                  <div className="" key={i}>
-                    <Link to={`/person/${actor.id}/hisname/${actor.name}`}>
-                      <Card className="w-[15rem] h-[26rem] bg-[#212529] rounded shadow-gray-900 flex my-10 ">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full justify-items-center">
+                {cast &&
+                  cast.map((actor, i) => (
+                    <Link
+                      to={`/person/${actor.id}/hisname/${actor.name}`}
+                      key={i}
+                    >
+                      <Card className="w-56 h-[25rem] bg-gradient-to-br from-[#23272f] to-[#181c23] rounded-2xl shadow-lg border border-[#23272f] hover:scale-105 transition-transform duration-200 flex flex-col">
                         <CardHeader
                           floated={false}
                           shadow={false}
                           color="transparent"
-                          className="m-0 rounded "
+                          className="rounded-t-2xl w-full h-60 overflow-hidden"
                         >
                           {actor.profile_path ? (
                             <img
                               src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${actor.profile_path}`}
-                              alt="ui/ux review check"
+                              alt={actor.name}
+                              className="w-full h-full object-cover"
                             />
                           ) : (
-                            <img src={img} width="100%" />
+                            <img
+                              src={img}
+                              width="100%"
+                              className="w-full h-full object-cover"
+                            />
                           )}
                         </CardHeader>
-                        <CardBody className="font-bold py-5">
-                          <div
-                            variant="h4"
-                            className="flex flex-col  text-white "
-                          >
-                            <h1> .{actor.name}</h1>
-                            <h1 className="text-xl font-medium text-yellow-800 ">
-                              {actor.character}
-                            </h1>
-                          </div>
+                        <CardBody className="flex flex-col items-center justify-center h-28">
+                          <h1 className="text-lg font-bold text-white text-center truncate w-full">
+                            {actor.name}
+                          </h1>
+                          <h2 className="text-yellow-400 text-base text-center mt-1 truncate w-full">
+                            {actor.character}
+                          </h2>
                         </CardBody>
                       </Card>
                     </Link>
-                  </div>
-                ))}
+                  ))}
+              </div>
             </div>
-            <div className="ms-10  flex flex-col justify-center items-center md:justify-start md:items-start">
-              <h1 className="text-3xl text-white container mx-auto py-5 font-bold text-center md:text-start">
-                Crew :{" "}
-                <span className="text-[#0DCAF0] ">{crew && crew.length}</span>
+            {/* Crew */}
+            <div className="w-full md:w-1/2 flex flex-col items-center">
+              <h1 className="text-3xl text-white py-5 font-bold text-center">
+                Crew:{" "}
+                <span className="text-[#0DCAF0]">{crew && crew.length}</span>
               </h1>
-              {crew &&
-                crew.map((actor, i) => (
-                  <div className="" key={i}>
-                    {/*  */}
-                    <h1 className="text-white text-3xl text-center md:text-start">
-                      {" *"}
-                      {actor.known_for_department == "Writing"
-                        ? actor.department
-                        : actor.known_for_department == "Production"
-                        ? actor.department
-                        : actor.known_for_department == "Camera"
-                        ? actor.department
-                        : actor.known_for_department == "Editing"
-                        ? actor.department
-                        : actor.known_for_department == "Acting"
-                        ? actor.department
-                        : actor.known_for_department == "Art"
-                        ? actor.department
-                        : actor.known_for_department == "Visual Effects"
-                        ? actor.department
-                        : actor.department}
-                    </h1>
-                    {/*  */}
-                    <Link to={`/person/${actor.id}/hisname/${actor.name}`}>
-                      <Card className="w-[15rem] h-[26rem] bg-[#212529] rounded shadow-gray-900 flex my-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full justify-items-center">
+                {crew &&
+                  crew.map((actor, i) => (
+                    <Link
+                      to={`/person/${actor.id}/hisname/${actor.name}`}
+                      key={i}
+                    >
+                      <Card className="w-56 h-[25rem] bg-gradient-to-br from-[#23272f] to-[#181c23] rounded-2xl shadow-lg border border-[#23272f] hover:scale-105 transition-transform duration-200 flex flex-col">
                         <CardHeader
                           floated={false}
                           shadow={false}
                           color="transparent"
-                          className="m-0 rounded "
+                          className="rounded-t-2xl w-full h-60 overflow-hidden"
                         >
                           {actor.profile_path ? (
                             <img
                               src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${actor.profile_path}`}
-                              alt="ui/ux review check"
+                              alt={actor.name}
+                              className="w-full h-full object-cover"
                             />
                           ) : (
-                            <img src={img} width="100%" />
+                            <img
+                              src={img}
+                              width="100%"
+                              className="w-full h-full object-cover"
+                            />
                           )}
                         </CardHeader>
-                        <CardBody className="font-bold py-5">
-                          <div
-                            variant="h4"
-                            className="flex flex-col  text-white "
-                          >
-                            {actor.known_for_department == "Writing"
-                              ? actor.name
-                              : actor.known_for_department == "Production"
-                              ? actor.name
-                              : actor.known_for_department == "Camera"
-                              ? actor.name
-                              : actor.known_for_department == "Editing"
-                              ? actor.name
-                              : actor.known_for_department == "Acting"
-                              ? actor.name
-                              : actor.known_for_department == "Art"
-                              ? actor.name
-                              : actor.known_for_department == "Visual Effects"
-                              ? actor.name
-                              : actor.name}
-                            <h1 className="text-xl font-medium text-yellow-800 ">
-                              {actor.known_for_department == "Writing"
-                                ? actor.job
-                                : actor.known_for_department == "Production"
-                                ? actor.job
-                                : actor.known_for_department == "Camera"
-                                ? actor.job
-                                : actor.known_for_department == "Editing"
-                                ? actor.job
-                                : actor.known_for_department == "Acting"
-                                ? actor.job
-                                : actor.known_for_department == "Art"
-                                ? actor.job
-                                : actor.known_for_department == "Visual Effects"
-                                ? actor.job
-                                : actor.job}
-                            </h1>
-                          </div>
+                        <CardBody className="flex flex-col items-center justify-center h-28">
+                          <h1 className="text-lg font-bold text-white text-center truncate w-full">
+                            {actor.name}
+                          </h1>
+                          <h2 className="text-yellow-400 text-base text-center mt-1 truncate w-full">
+                            {actor.job}
+                          </h2>
+                          <span className="text-xs text-[#0DCAF0] mt-1">
+                            {actor.department}
+                          </span>
                         </CardBody>
                       </Card>
                     </Link>
-                  </div>
-                ))}
+                  ))}
+              </div>
             </div>
           </div>
           <div className=" flex mb-10 justify-center items-center">

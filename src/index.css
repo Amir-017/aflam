@@ -17,11 +17,11 @@
   text-decoration: underline;
 }
 
-.dell {
+.delButSearch {
   cursor: pointer !important;
 }
 
-.handlediv {
+.handelSlider {
   display: flex !important;
   justify-content: center !important;
 }
@@ -36,4 +36,10 @@
 
 .cardSe {
   cursor: pointer !important;
+}
+.moveEnd .flex {
+  justify-content: center !important;
+  align-items: center !important;
+  display: flex !important;
+  width: 100% !important;
 }

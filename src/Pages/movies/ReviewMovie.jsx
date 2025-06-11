@@ -5,16 +5,20 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
 import { getMovieDetails } from "../../SystmeRdx/Slices/moviesSlices/moviesSlice";
 import ShowMoreText from "react-show-more-text";
-import { FaStar } from "react-icons/fa";
 const ReviewMovie = () => {
   const { reviews, reviewsLoading } = useSelector(
     (state) => state.AllcastAndCrew
   );
   const dispatch = useDispatch();
-  const { idMovie, nameMovie } = useParams();
+  const { idMovie } = useParams();
   useEffect(() => {
     dispatch(getReviewMovie(idMovie));
     dispatch(getMovieDetails(idMovie));
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    window.scrollTo(0, 0);
   }, []);
   const navigate = useNavigate();
   const backAstep = () => {
@@ -22,6 +26,7 @@ const ReviewMovie = () => {
   };
   //
   const { movieDetails } = useSelector((state) => state.myMovies);
+
   return (
     <div className="w-full">
       {reviewsLoading ? (
@@ -77,57 +82,55 @@ const ReviewMovie = () => {
           </div>
 
           {/*  */}
-          {reviews.length >= 1 ? (
-            <div className="">
-              {reviews.map((review, i) => (
-                <div className="my-10" key={i}>
-                  <div className="container mx-auto w-[100%] bg-[#212529]  rounded-2xl py-5">
-                    <div className="container mx-auto w-[70%]  flex flex-col gap-5 mt-5">
-                      <div className="text-3xl flex  flex-col md:flex-row ">
-                        <div className="text-center flex flex-col md:flex-row gap-y-3">
-                          A Review by
-                          <div className="text-[#0DCAF0] px-5 mb-3 md:mb-0">
-                            {review.author}
-                          </div>{" "}
-                        </div>
-
-                        <div className="w-full  md:w-[10%] h-10  flex justify-center    border-[1px]   text-white   rounded-xl">
-                          <FaStar className="me-0 md:me-2" />{" "}
-                          {review.author_details.rating}
-                        </div>
-                      </div>
-                      <div className="text-2xl">
-                        Written by{"  "}
-                        <span className="text-[#0DCAF0]">
-                          {review.author}
-                        </span>{" "}
-                        on
-                        {"  "}
-                        <span className="text-[#0DCAF0]">
-                          {review.created_at.split("").slice(0, 10).join("")}
+          <div className="w-full flex justify-center items-center my-10">
+            {reviews && (
+              <div className="w-full  max-w-2xl bg-[#1f2431] rounded-2xl shadow-lg p-6 flex flex-col gap-4">
+                {reviews.map((review, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col md:flex-row gap-5 items-start bg-[#23272f] rounded-2xl shadow-lg p-6"
+                  >
+                    {/* Avatar */}
+                    <div className="flex-shrink-0 flex justify-center items-center w-16 h-16 rounded-full bg-[#0DCAF0]/10 border-2 border-[#0DCAF0]">
+                      <svg
+                        className="w-10 h-10 text-[#0DCAF0]"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M6 20c0-2.21 3.58-4 8-4s8 1.79 8 4" />
+                      </svg>
+                    </div>
+                    {/* Review Content */}
+                    <div className="flex-1 flex flex-col gap-2">
+                      <h2 className="text-xl font-bold text-[#0DCAF0]">
+                        {review.author}
+                        <span className="text-sm text-gray-400 font-normal ms-2">
+                          {review.created_at
+                            ? new Date(review.created_at).toLocaleDateString(
+                                "en-GB",
+                                {
+                                  day: "2-digit",
+                                  month: "short",
+                                  year: "numeric",
+                                }
+                              )
+                            : ""}
                         </span>
-                      </div>
-
-                      <div>
-                        <span className="text-blue-600 text-2xl font-bold">
-                          Content :-
-                        </span>
+                      </h2>
+                      <div className="text-base text-white leading-relaxed">
                         <ShowMoreText width={550}>
                           {review.content}
                         </ShowMoreText>
                       </div>
-                      <h1></h1>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-3xl w-[100%] bg-[#212529]  rounded-2xl py-5 font-bold text-center my-10 flex justify-center">
-              We don't have any reviews for{" "}
-              <span className="text-[#0DCAF0] ms-3"> {movieDetails.title}</span>
-            </div>
-          )}
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>

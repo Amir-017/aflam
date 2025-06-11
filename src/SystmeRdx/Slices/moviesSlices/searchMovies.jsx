@@ -13,7 +13,7 @@ const data = {
   searchLength: false,
   // search series
   seriesSearch: [],
-  changeOneToAnother: "",
+  changeButtonMovieToSeries: "",
 };
 //////////////////////// search movie
 export const getSearchMovies = createAsyncThunk(
@@ -78,14 +78,14 @@ const homeMoviesSearch = createSlice({
     aboutSearch: (state) => {
       state.checkSearchMovie = !state.checkSearchMovie;
     },
-    del: (state) => {
+    delButSearch: (state) => {
       state.searchLength = true;
     },
     aboutMovie: (state) => {
-      state.changeOneToAnother = "movie";
+      state.changeButtonMovieToSeries = "movie";
     },
     aboutSeries: (state) => {
-      state.changeOneToAnother = "serie";
+      state.changeButtonMovieToSeries = "serie";
     },
   },
   extraReducers: (builder) => {
@@ -108,5 +108,5 @@ const homeMoviesSearch = createSlice({
 });
 
 export const aboutSearchMovie = homeMoviesSearch.reducer;
-export const { aboutSearch, amer, del, aboutMovie, aboutSeries } =
+export const { aboutSearch, amer, delButSearch, aboutMovie, aboutSeries } =
   homeMoviesSearch.actions;

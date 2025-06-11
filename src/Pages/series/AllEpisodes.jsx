@@ -25,6 +25,11 @@ const AllEpisodes = () => {
   useEffect(() => {
     dispatch(getEpisodes({ idseries, season_number }));
     dispatch(getSeriesDetails(idseries));
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    window.scrollTo(0, 0);
   }, []);
   const backAstep = () => {
     navigate(-1);
@@ -60,22 +65,21 @@ const AllEpisodes = () => {
         </div>
       ) : (
         <div className="w-full">
-          <div className=" w-full  bg-[#212529] px-10 pt-5 flex justify-center items-center flex-col md:flex-row md:justify-start ">
+          <div className="w-full bg-[#212529] px-4 md:px-10 pt-5 flex flex-col md:flex-row items-center gap-6 md:gap-10 rounded-b-3xl shadow-lg">
             <img
               src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${seriesDetails.backdrop_path}`}
               alt="logo"
-              className="rounded-2xl mb-5 w-[30%] md:w-[12%]"
+              className="rounded-2xl mb-4 md:mb-0 w-[60%] max-w-[220px] md:w-[140px] shadow-lg object-cover"
             />
-
-            <div className="w-full flex  flex-col justify-start   px-0 md:justify-center md:px-10 ">
-              <h1 className="text-white font-bold  text-3xl text-center md:text-start">
+            <div className="flex-1 flex flex-col justify-center md:justify-start">
+              <h1 className="text-white font-bold text-3xl text-center md:text-start mb-2">
                 {seriesDetails.name}
               </h1>
-              <div className="my-5 flex justify-center md:justify-start">
+              <div className="flex justify-center md:justify-start">
                 <Button
                   onClick={backAstep}
                   variant="outlined"
-                  className=" border-[#0DCAF0]  text-[#0DCAF0] hover:bg-[#0DCAF0] hover:text-black"
+                  className="border-[#0DCAF0] text-[#0DCAF0] hover:bg-[#0DCAF0] hover:text-black"
                 >
                   Back a step
                 </Button>
@@ -83,98 +87,86 @@ const AllEpisodes = () => {
             </div>
           </div>
 
-          <div
-            className={`container mx-auto flex flex-col justify-center items-center lg:justify-start  gap-x-10 gap-y-10 `}
-          >
-            {" "}
+          <div className="container mx-auto flex flex-col gap-y-10 py-8">
             <div
-              className={`text-3xl text-[#0DCAF0] container mx-auto py-5 font-bold text-center md:text-start ${
-                !episodes.length && "mb-[9.5em]"
-              }  `}
+              className={`text-3xl text-[#0DCAF0] font-bold text-center md:text-start`}
             >
-              All Episodes :{" "}
+              All Episodes:{" "}
               <span className="text-white underline">
                 {episodes && episodes.length}
               </span>
             </div>
-            {seriesDetails &&
-              episodes.map((last, key) => (
-                <div className="w-[70%] md:w-[90%] lg:w-[100%]" key={key}>
-                  <Card className=" md:mx-0  lg:flex-row bg-gray-900 flex flex-col    ">
-                    <div className=" m-0   lg:w-1/5   shrink-0 bg-gray-900 w-full flex justify-center items-center  rounded-[3em]">
-                      {last.still_path ? (
-                        <img
-                          src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${last.still_path}`}
-                          alt="logo"
-                          className=" ps-5 pt-5 pb-5 w-[70%] md:w-[80%] md:me-5  lg:w-[70%] rounded-[2em]"
-                        />
-                      ) : (
-                        <img
-                          src={fakeImg}
-                          alt="logo"
-                          className=" ps-5 pt-5 pb-5 w-[70%] md:w-[80%] md:me-5  lg:w-[70%] rounded-[2em]"
-                        />
-                      )}
+            <div className="flex flex-col gap-8">
+              {seriesDetails &&
+                episodes.map((last, key) => (
+                  <Card
+                    key={key}
+                    className="flex flex-col md:flex-row bg-gradient-to-br from-[#181c23] to-[#23272f] rounded-3xl shadow-2xl overflow-hidden"
+                  >
+                    <div className="md:w-1/4 flex justify-center items-center bg-[#23272f]">
+                      <img
+                        src={
+                          last.still_path
+                            ? `https://image.tmdb.org/t/p/w600_and_h900_bestv2${last.still_path}`
+                            : fakeImg
+                        }
+                        alt="episode"
+                        className="w-40 h-40 md:w-44 md:h-56 object-cover rounded-2xl m-4 shadow"
+                      />
                     </div>
-                    <CardBody className="w-full   ">
-                      <div className=" font-bold text-white flex flex-col gap-y-5    ">
-                        <div className="flex flex-col   md:flex-col lg:flex-row lg:gap-x-5 md:gap-y-5 items-center justify-evenly lg:items-start lg:justify-between  text-2xl">
-                          <h1 className="text-white">
-                            {" "}
-                            Episode{" "}
-                            <span className="text-[#0DCAF0]">
-                              {last.episode_number}
-                            </span>
-                          </h1>
-                          <h1 className="text-white">
-                            {" "}
+                    <CardBody className="flex-1 flex flex-col gap-4 p-4 md:p-8">
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div className="flex flex-col md:flex-row md:gap-8 gap-2">
+                          <span className="text-xl font-bold text-[#0DCAF0]">
+                            Episode {last.episode_number}
+                          </span>
+                          <span className="text-white text-lg">
                             Type:{" "}
                             <span className="text-[#0DCAF0]">
                               {last.episode_type}
                             </span>
-                          </h1>
-
-                          <div className="flex flex-col">
-                            <div className="bg-white text-black flex rounded w-32 my-5 md:my-0  justify-center items-center ">
-                              <h1>{last.vote_average}</h1>
-                              <FaStar className="me-0 md:me-2" />{" "}
-                            </div>
-                            <h1 className="text-[#0DCAF0]">{last.air_date}</h1>
-                          </div>
+                          </span>
+                          <span className="flex items-center gap-2 bg-white text-black px-3 py-1 rounded-lg font-semibold shadow">
+                            {last.vote_average}
+                            <FaStar className="text-yellow-500" />
+                          </span>
+                          <span className="text-[#0DCAF0] text-base">
+                            {last.air_date}
+                          </span>
                         </div>
-
+                      </div>
+                      <div className="mt-2">
                         {last.overview ? (
-                          <h1 className="font-bold text-gray-300 mt-10 text-[16px] text-center lg:text-start">
-                            {" "}
-                            <ShowMoreText
-                              width={550}
-                              lines={6}
-                              more="Show more"
-                              less="Show less"
-                              className="content-css"
-                              anchorClass="show-more-less-clickable"
-                              expanded={false}
-                              truncatedEndingComponent={"... "}
-                            >
-                              {last.overview}
-                            </ShowMoreText>
-                          </h1>
+                          <ShowMoreText
+                            width={600}
+                            lines={5}
+                            more="Show more"
+                            less="Show less"
+                            className="content-css text-gray-300 text-base md:text-lg"
+                            anchorClass="show-more-less-clickable"
+                            expanded={false}
+                            truncatedEndingComponent={"... "}
+                          >
+                            {last.overview}
+                          </ShowMoreText>
                         ) : (
-                          <h1 className="font-bold text-[white] mt-10 text-[16px] text-center lg:text-start">
+                          <h1 className="font-bold text-white mt-4 text-base text-center md:text-start">
                             This Season Doesn't Have Overview Yet
                           </h1>
                         )}
                       </div>
+                      <div className="flex justify-start mt-4">
+                        <Link
+                          className="text-[#0DCAF0] hover:underline font-bold transition"
+                          to={`/detailssereis/${idseries}/season/${last.season_number}/episode/${last.episode_number}`}
+                        >
+                          All Cast & Crew
+                        </Link>
+                      </div>
                     </CardBody>
                   </Card>
-                  <Link
-                    className="text-[#0DCAF0] mt-3 hover:underline  text-center lg:text-start flex justify-start items-end"
-                    to={`/detailssereis/${idseries}/season/${last.season_number}/episode/${last.episode_number}`}
-                  >
-                    All Cast & crew
-                  </Link>
-                </div>
-              ))}
+                ))}
+            </div>
           </div>
         </div>
       )}

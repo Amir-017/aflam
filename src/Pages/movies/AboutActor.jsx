@@ -19,6 +19,11 @@ const AboutActor = () => {
   useEffect(() => {
     dispatch(getInfoActor(idactor));
     dispatch(getWorkActor(idactor));
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    window.scrollTo(0, 0);
   }, []);
 
   const navigate = useNavigate();
@@ -57,139 +62,153 @@ const AboutActor = () => {
           </svg>
         </div>
       ) : (
-        <div className="w-full ">
-          <div className=" flex gap-x-10  flex-col lg:flex-row w-full">
-            <div className=" w-full md:w-full md:mt-10  lg:w-[30%]  flex justify-center">
+        <div className="w-full px-2 py-8">
+          <div className="flex flex-col lg:flex-row gap-10 w-full">
+            {/* Sidebar: Actor Info */}
+            <div className="w-full h-[38em] lg:w-[28%] flex flex-col items-center bg-[#23272f] rounded-2xl shadow-lg p-6">
               <img
-                className="rounded-2xl w-[50%] md:w-[40%]  lg:w-[80%]   "
+                className="rounded-2xl w-40 h-56 object-cover mb-6 shadow-md"
                 src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${infoActor.profile_path}`}
-                alt=""
+                alt={infoActor.name}
               />
-            </div>
-            <div className="w-full  lg:w-[70%] ">
-              <h1 className="text-white mt-5 font-bold text-3xl text-center w-full lg:text-start ">
+              <h1 className="text-white font-bold text-2xl text-center mb-4">
                 {infoActor.name}
               </h1>
-              <div className="text-white my-10">
-                <h1 className="font-bold  text-2xl mb-5 text-[#0DCAF0] text-center md:text-start">
-                  Piography
-                </h1>
+              <div className="w-full">
+                <h2 className="text-[#0DCAF0] text-xl font-bold mb-2">
+                  Personal Info
+                </h2>
+                <div className="mb-2">
+                  <span className="text-white font-semibold">Known For: </span>
+                  <span className="text-[#0DCAF0]">
+                    {infoActor.known_for_department}
+                  </span>
+                </div>
+                <div className="mb-2">
+                  <span className="text-white font-semibold">Gender: </span>
+                  <span className="text-[#0DCAF0]">
+                    {infoActor.gender === 1
+                      ? "Female"
+                      : infoActor.gender === 2
+                      ? "Male"
+                      : "Other"}
+                  </span>
+                </div>
+                <div className="mb-2">
+                  <span className="text-white font-semibold">Birthday: </span>
+                  <span className="text-[#0DCAF0]">
+                    {infoActor.birthday || "Unknown"}
+                  </span>
+                </div>
+                <div className="mb-2">
+                  <span className="text-white font-semibold">
+                    Place of Birth:{" "}
+                  </span>
+                  <span className="text-[#0DCAF0]">
+                    {infoActor.place_of_birth || "Unknown"}
+                  </span>
+                </div>
+                <div className="mb-2">
+                  <span className="text-white font-semibold">
+                    Also Known As:
+                  </span>
+                  <ul className="list-disc list-inside mt-1 ">
+                    {infoActor.also_known_as &&
+                      infoActor.also_known_as.slice(0, 3).map((name, i) => (
+                        <li key={i} className="text-[#0DCAF0] text-sm ">
+                          {name}
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            {/* Main Content: Bio & Works */}
+            <div className="w-full lg:w-[72%] flex flex-col gap-8">
+              <div className="bg-[#23272f] rounded-2xl shadow-lg p-6">
+                <h2 className="text-[#0DCAF0] text-2xl font-bold mb-3">
+                  Biography
+                </h2>
                 {infoActor.biography ? (
-                  <p>{infoActor.biography}</p>
+                  <p className="text-white leading-relaxed">
+                    {infoActor.biography}
+                  </p>
                 ) : (
-                  <p className="text-center md:text-start">
+                  <p className="text-gray-400">
                     There's no Bio Belongs To This Actor
                   </p>
                 )}
               </div>
-            </div>
-          </div>
-          <div className=" flex grid-cols-5 w-full flex-col md:flex-row   ">
-            <div className="col-span-1 grid gap-y-5  justify-items-center items-center md:w-[25%] md:justify-items-start ms-5 ">
-              <h1 className="text-white text-3xl mb-5 font-bold">
-                Personal Info
-              </h1>
-              <div className="text-white text-center md:text-start">
-                <h1 className="text-2xl font-bold ">Known For </h1>
-                <h1 className="text-[#0DCAF0] text-xl">
-                  {infoActor.known_for_department}
-                </h1>
-              </div>
-              <div className="text-white text-center md:text-start">
-                <h1 className="text-2xl font-bold">Gender</h1>
-                <h1 className="text-[#0DCAF0] text-xl">{infoActor.gender}</h1>
-              </div>
-              <div className="text-white ">
-                <h1 className="text-2xl font-bold">Birthday</h1>
-                <h1 className="text-[#0DCAF0] text-xl">{infoActor.birthday}</h1>
-              </div>
-              <div className="text-white text-center md:text-start">
-                <h1 className="text-2xl font-bold">Place_Of_Birth</h1>
-                <h1 className="text-[#0DCAF0] text-xl">
-                  {infoActor.place_of_birth}
-                </h1>
-              </div>
-
-              <div className="text-white flex justify-center items-center md:justify-start md:items-start flex-col">
-                <h1 className="text-2xl font-bold">Also_Known_As</h1>
-                {infoActor.also_known_as &&
-                  infoActor.also_known_as.map((name, i) => (
-                    <h1 key={i} className="text-[#0DCAF0] text-xl">
-                      {name}
-                    </h1>
-                  ))}
-              </div>
-            </div>
-            <div className="py-10    col-span-4  grid justify-items-center  ">
-              {actorsWork.length >= 1 ? (
-                <div className="w-[75%] flex overflow-auto gap-6 ">
-                  {actorsWork.map((movie, i) => (
-                    <div className="" key={i}>
-                      {movie.media_type == "movie" ? (
-                        <Link
-                          to={`/movies/${movie.id}/title/${movie.original_title}`}
-                        >
-                          <Card className="mt-10 w-96 bg-gray-900  font-bold ">
-                            <CardHeader color="white" className="relative h-96">
-                              <img
-                                src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`}
-                                className="w-[150%] h-[100%] "
-                                alt="card-image"
-                              />
-                            </CardHeader>
-                            <CardBody>
-                              <div
-                                variant="h5"
-                                className="mb-2 text-white text-2xl"
+              <div>
+                <h2 className="text-[#0DCAF0] text-2xl font-bold mb-10">
+                  Known For
+                </h2>
+                {actorsWork.length >= 1 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-10 me-2">
+                    {actorsWork.map((movie, i) => (
+                      <div key={i}>
+                        {movie.media_type === "movie" ? (
+                          <Link
+                            to={`/movies/${movie.id}/title/${movie.original_title}`}
+                          >
+                            <Card className="bg-gray-900 rounded-2xl shadow-md hover:scale-105 transition-transform duration-200">
+                              <CardHeader
+                                color="white"
+                                className="relative h-64 overflow-hidden rounded-t-2xl"
                               >
-                                {movie.media_type == "movie" && movie.title}
-                              </div>
-                            </CardBody>
-                          </Card>
-                        </Link>
-                      ) : movie.media_type == "tv" ? (
-                        <Link
-                          to={`/series/${movie.id}/title/${movie.original_title}`}
-                        >
-                          <Card className="mt-10 w-96 bg-gray-900  font-bold ">
-                            <CardHeader color="white" className="relative h-96">
-                              <img
-                                src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`}
-                                className="w-[150%] h-[100%] "
-                                alt="card-image"
-                              />
-                            </CardHeader>
-                            <CardBody>
-                              <div
-                                variant="h5"
-                                className="mb-2 text-white text-2xl"
+                                <img
+                                  src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`}
+                                  className="object-cover w-full h-full"
+                                  alt={movie.title}
+                                />
+                              </CardHeader>
+                              <CardBody>
+                                <div className="text-white text-lg font-bold truncate">
+                                  {movie.title}
+                                </div>
+                              </CardBody>
+                            </Card>
+                          </Link>
+                        ) : movie.media_type === "tv" ? (
+                          <Link to={`/series/${movie.id}/title/${movie.name}`}>
+                            <Card className="bg-gray-900 rounded-2xl shadow-md hover:scale-105 transition-transform duration-200">
+                              <CardHeader
+                                color="white"
+                                className="relative h-64 overflow-hidden rounded-t-2xl"
                               >
-                                {movie.media_type == "tv" && movie.name}
-                              </div>
-                            </CardBody>
-                          </Card>
-                        </Link>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className=" text-2xl my-5  w-[75%] h-20 bg-gray-900 rounded-2xl flex justify-center items-center text-[#0DCAF0]">
-                  Sorry We Don't Have Any Actor's Work For This Movie
-                  <div className="ms-2">
-                    <CgSmileSad />
+                                <img
+                                  src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`}
+                                  className="object-cover w-full h-full"
+                                  alt={movie.name}
+                                />
+                              </CardHeader>
+                              <CardBody>
+                                <div className="text-white text-lg font-bold truncate">
+                                  {movie.name}
+                                </div>
+                              </CardBody>
+                            </Card>
+                          </Link>
+                        ) : null}
+                      </div>
+                    ))}
                   </div>
-                </div>
-              )}
-              <Button
-                onClick={backAstep}
-                variant="outlined"
-                className=" mt-10 border-[#0DCAF0]  text-[#0DCAF0] hover:bg-[#0DCAF0] hover:text-black"
-              >
-                Back a step
-              </Button>
+                ) : (
+                  <div className="text-2xl my-5 w-full bg-gray-900 rounded-2xl flex justify-center items-center text-[#0DCAF0] h-20">
+                    Sorry, we don't have any actor's work for this person
+                    <span className="ms-2">
+                      <CgSmileSad />
+                    </span>
+                  </div>
+                )}
+                <Button
+                  onClick={backAstep}
+                  variant="outlined"
+                  className="mt-10 border-[#0DCAF0] text-[#0DCAF0] hover:bg-[#0DCAF0] hover:text-black"
+                >
+                  Back a step
+                </Button>
+              </div>
             </div>
           </div>
         </div>

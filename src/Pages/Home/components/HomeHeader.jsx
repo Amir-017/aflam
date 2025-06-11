@@ -1,6 +1,4 @@
 import { Button } from "@material-tailwind/react";
-import React from "react";
-import { Link } from "react-router-dom";
 
 const HomeHeader = () => {
   return (
@@ -9,50 +7,56 @@ const HomeHeader = () => {
         Home
       </h1>
 
-      <div className="grid grid-cols-2 items-center justify-items-center w-full">
-        <div className="w-[100%] ">
-          <h1 className="font-bold text-3xl text-center mb-3">SORT BY</h1>
-          <div className="flex flex-col gap-y-3  justify-evenly items-center md:flex md:flex-row ">
+      <div className="w-full flex flex-col md:flex-row gap-6 md:gap-10 items-stretch justify-center mt-8">
+        {/* SORT BY */}
+        <div className="flex-1 rounded-xl p-5 flex flex-col items-center shadow-md">
+          <h2 className="font-bold text-2xl md:text-3xl text-center mb-4 text-[#0DCAF0] tracking-wide">
+            SORT BY
+          </h2>
+          <div className="grid grid-cols-2 gap-3 w-full md:flex md:flex-col md:gap-4">
             <Button
               variant="outlined"
-              className="text-white hover:bg-white hover:text-black border-white"
+              className="text-white hover:bg-[#0DCAF0] hover:text-black border-[#0DCAF0] transition-all"
             >
               Title
             </Button>
             <Button
               variant="outlined"
-              className="text-white hover:bg-white hover:text-black border-white"
+              className="text-white hover:bg-[#0DCAF0] hover:text-black border-[#0DCAF0] transition-all"
             >
-              Poplarity
+              Popularity
             </Button>
             <Button
               variant="outlined"
-              className="text-white hover:bg-white hover:text-black border-white"
+              className="text-white hover:bg-[#0DCAF0] hover:text-black border-[#0DCAF0] transition-all"
             >
               Date
             </Button>
             <Button
               variant="outlined"
-              className="text-white hover:bg-white hover:text-black border-white"
+              className="text-white hover:bg-[#0DCAF0] hover:text-black border-[#0DCAF0] transition-all"
             >
-              Ratin
+              Rating
             </Button>
           </div>
         </div>
-        <div className="w-[50%] ">
-          <h1 className="font-bold text-3xl text-center mb-3">SORT ORDER</h1>
-          <div className="flex flex-col md:flex-row md:gap-x-1 gap-y-3  justify-evenly items-center">
+        {/* SORT ORDER */}
+        <div className="flex-1  rounded-xl p-5 flex flex-col items-center shadow-md">
+          <h2 className="font-bold text-2xl md:text-3xl text-center mb-4 text-[#0DCAF0] tracking-wide">
+            SORT ORDER
+          </h2>
+          <div className="flex flex-col gap-3 w-full md:flex-row md:gap-4 justify-center items-center">
             <Button
               variant="outlined"
-              className="text-white hover:bg-white hover:text-black border-white"
+              className="text-white hover:bg-[#0DCAF0] hover:text-black border-[#0DCAF0] transition-all w-full"
             >
-              DESENDING
+              DESCENDING
             </Button>
             <Button
               variant="outlined"
-              className="text-white hover:bg-white hover:text-black border-white"
+              className="text-white hover:bg-[#0DCAF0] hover:text-black border-[#0DCAF0] transition-all w-full"
             >
-              ASENDING
+              ASCENDING
             </Button>
           </div>
         </div>

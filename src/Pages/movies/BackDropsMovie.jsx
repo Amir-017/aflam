@@ -15,6 +15,11 @@ const BackDropsMovie = () => {
   useEffect(() => {
     dispatch(getBackDrops(idMovie));
     dispatch(getMovieDetails(idMovie));
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    window.scrollTo(0, 0);
   }, []);
   const navigate = useNavigate();
   const backAstep = () => {

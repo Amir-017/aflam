@@ -26,6 +26,11 @@ const VideoSeries = () => {
     dispatch(getSeriesDetails(idseries));
 
     dispatch(getVideoSeries(idseries));
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    window.scrollTo(0, 0);
   }, []);
   const navigate = useNavigate();
 

@@ -18,6 +18,11 @@ const VideoMovies = () => {
   useEffect(() => {
     dispatch(getMovieDetails(idMovie));
     dispatch(getVideoMovie(idMovie));
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    window.scrollTo(0, 0);
   }, []);
   const navigate = useNavigate();
   const backAstep = () => {
@@ -79,26 +84,34 @@ const VideoMovies = () => {
           </div>
 
           {/* videos */}
-          <div className="  grid justify-items-center gap-y-[5rem]  ">
-            <div className="text-white text-4xl container mx-auto my-5">
-              All Videos :{" "}
+          <div className="w-full py-10">
+            <div className="text-white text-3xl md:text-4xl font-bold text-center mb-10">
+              All Videos&nbsp;
               <span className="underline text-[#0DCAF0]">
                 {videoMovie.length}
               </span>
             </div>
-            {videoMovie.map((movie, i) => (
-              <div className="" key={i}>
-                <iframe
-                  className="border-[.1rem] w-[300px] h-[300px] md:w-[800px] md:h-[400px] lg:w-[1000px] lg:h-[400px]"
-                  src={`https://www.youtube.com/embed/${movie.key}?si=bLuvl3WnAUMERPL9`}
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center mx-4">
+              {videoMovie.map((movie, i) => (
+                <div
+                  key={i}
+                  className="w-full max-w-[550px] bg-[#23272f] rounded-2xl shadow-lg p-3 flex flex-col items-center"
+                >
+                  <iframe
+                    className="rounded-xl border-2 border-[#0DCAF0] w-full h-[220px] md:h-[260px] lg:h-[220px] bg-black"
+                    src={`https://www.youtube.com/embed/${movie.key}?si=bLuvl3WnAUMERPL9`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  ></iframe>
+                  <div className="mt-4 text-white text-center text-lg font-semibold truncate w-full">
+                    {movie.name}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}
