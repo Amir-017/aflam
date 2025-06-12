@@ -94,14 +94,14 @@ const Movies = () => {
                         <img
                           src={`https://media.themoviedb.org/t/p/w500${movie.backdrop_path}`}
                           alt={movie.title}
-                          className="object-cover w-full h-[25rem]"
+                          className="object-center w-full h-[25rem]"
                         />
                       </Link>
                     ) : (
                       <img
                         src={fakeImg}
                         alt="logo"
-                        className="object-cover w-full h-[25rem] "
+                        className="object-center w-full h-[25rem] "
                       />
                     )}
                   </CardHeader>

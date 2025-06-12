@@ -57,44 +57,83 @@ const BackDropsMovie = () => {
         </div>
       ) : (
         <div className="my-10">
-          <div className=" w-full  bg-[#212529] px-10 pt-5 flex justify-center items-center flex-col md:flex-row md:justify-start ">
+          {/* Header Card */}
+          <div className="w-full bg-gradient-to-br from-[#181c23] to-[#23272f] px-6 md:px-10 pt-6 pb-6 flex !items-center flex-col md:flex-row  md:items-start gap-6 rounded-3xl shadow-2xl">
             <img
               src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movieDetails.poster_path}`}
               alt="logo"
-              className="rounded mb-5 w-[30%] md:w-[12%]"
+              className="rounded-2xl mb-4 md:mb-0 w-[60%] max-w-[220px] md:w-[140px] shadow-lg object-cover border-4 border-[#23272f] bg-[#23272f]"
             />
-
-            <div className="w-full flex  flex-col justify-start   px-0 md:justify-center md:px-10 ">
-              <h1 className="text-white font-bold  text-3xl text-center md:text-start">
+            <div className="flex-1 flex flex-col  md:justify-start">
+              <h1 className="text-white font-bold text-3xl text-center md:text-start mb-2">
                 {movieDetails.title}
               </h1>
-              <div className="my-5 flex justify-center md:justify-start">
+              <div className="flex flex-wrap gap-3 justify-center md:justify-start mb-4 animate-bounce">
+                <span className="bg-[#0DCAF0] text-black px-3 py-1 rounded-full font-semibold text-sm shadow">
+                  {movieDetails.release_date?.slice(0, 4)}
+                </span>
+                <span className="bg-[#23272f] text-[#0DCAF0] px-3 py-1 rounded-full font-semibold text-sm shadow border border-[#0DCAF0]">
+                  {movieDetails.original_language?.toUpperCase()}
+                </span>
+                <span className="bg-[#23272f] text-white px-3 py-1 rounded-full font-semibold text-sm shadow border border-[#23272f]">
+                  {movieDetails.vote_average
+                    ? `⭐ ${movieDetails.vote_average}`
+                    : "N/A"}
+                </span>
+              </div>
+              <div className="flex justify-center md:justify-start">
                 <Button
                   onClick={backAstep}
                   variant="outlined"
-                  className=" border-[#0DCAF0]  text-[#0DCAF0] hover:bg-[#0DCAF0] hover:text-black"
+                  className="border-[#0DCAF0] text-[#0DCAF0] hover:bg-[#0DCAF0] hover:text-black"
                 >
                   Back a step
                 </Button>
               </div>
             </div>
           </div>
-          <div className="text-white text-4xl container mx-auto my-10 text-center lg:text-start">
-            All Posters :{" "}
-            <span className="underline text-[#0DCAF0]">{posters.length}</span>
+
+          {/* Title */}
+          <div className="text-white text-4xl container mx-auto my-10 text-center lg:text-start font-bold flex flex-col gap-2">
+            <span>
+              All Posters :
+              <span className="underline text-[#0DCAF0] ms-2">
+                {posters?.length}
+              </span>
+            </span>
+            <span className="text-lg text-[#87cbd9] font-medium">
+              Click any image to view in full size
+            </span>
           </div>
-          <div className="w-full grid justify-items-center grid-cols-1  gap-10 container mx-auto md:grid-cols-2 lg:grid-cols-3">
+
+          {/* posters  */}
+          <div className="w-full grid justify-items-center grid-cols-1 gap-10 container mx-auto md:grid-cols-2 lg:grid-cols-3">
             {posters &&
-              posters.map((imgPost, i) => (
-                <div className="" key={i}>
-                  <img
-                    className="rounded-2xl"
-                    alt=""
-                    src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${imgPost.file_path}`}
-                    width={200}
-                    height={200}
-                  />
-                </div>
+              posters.map((imgBack, i) => (
+                <a
+                  href={`https://image.tmdb.org/t/p/original${imgBack.file_path}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group w-full flex flex-col items-center"
+                  key={i}
+                >
+                  <div className="relative w-full flex justify-center">
+                    <img
+                      className="rounded-2xl shadow-lg border-4 border-[#23272f] group-hover:border-[#0DCAF0] bg-[#23272f] max-h-[320px] object-cover"
+                      alt=""
+                      src={`https://image.tmdb.org/t/p/w780${imgBack.file_path}`}
+                      width={350}
+                      height={200}
+                      loading="lazy"
+                    />
+                    <span className="absolute right-23 md:top-2 md:right-2 bg-[#0DCAF0] text-black text-xs font-bold px-3 py-1 rounded-full shadow">
+                      {i + 1}
+                    </span>
+                  </div>
+                  <span className="mt-2 text-[#0DCAF0] text-sm font-semibold group-hover:underline">
+                    View Full Size
+                  </span>
+                </a>
               ))}
           </div>
         </div>

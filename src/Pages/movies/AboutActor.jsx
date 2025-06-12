@@ -22,7 +22,6 @@ const AboutActor = () => {
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
-
     window.scrollTo(0, 0);
   }, []);
 
@@ -30,7 +29,6 @@ const AboutActor = () => {
   const backAstep = () => {
     navigate(-1);
   };
-  // console.log(actorsWork);
 
   return (
     <div className="w-full">

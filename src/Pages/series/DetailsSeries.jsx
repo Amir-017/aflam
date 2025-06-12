@@ -743,7 +743,8 @@ const DetailsSeries = () => {
                             <img
                               src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${drop.file_path}`}
                               alt=""
-                              className="rounded-2xl w-[150px]  object-cover"
+                              className="rounded-2xl w-[150px]  object-cover transition-transform duration-200 hover:scale-105"
+                              loading="lazy"
                             />
                           </div>
                         ))}
@@ -770,7 +771,7 @@ const DetailsSeries = () => {
                             <img
                               src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${poster.file_path}`}
                               alt=""
-                              className="rounded-2xl w-[150px]  object-cover"
+                              className="rounded-2xl w-[150px]  object-cover transition-transform duration-200 hover:scale-105"
                             />
                           </div>
                         ))}

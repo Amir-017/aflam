@@ -17,12 +17,7 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Typography,
-} from "@material-tailwind/react";
+import { Card, CardHeader, CardBody } from "@material-tailwind/react";
 import ShowMoreText from "react-show-more-text";
 import {
   Tabs,
@@ -671,7 +666,7 @@ const MovieDetails = () => {
                             <img
                               src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${drop.file_path}`}
                               alt=""
-                              className="rounded-2xl w-[200px] h-[120px] object-cover"
+                              className="rounded-2xl w-[200px] h-[120px] object-cover transition-transform duration-200 hover:scale-105"
                             />
                           </div>
                         ))}
@@ -698,7 +693,7 @@ const MovieDetails = () => {
                             <img
                               src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${poster.file_path}`}
                               alt=""
-                              className="rounded-2xl w-[200px] h-[300px] object-cover"
+                              className="rounded-2xl w-[200px] h-[300px] object-cover transition-transform duration-200 hover:scale-105"
                             />
                           </div>
                         ))}

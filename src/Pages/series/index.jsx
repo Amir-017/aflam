@@ -90,7 +90,7 @@ const Series = () => {
                         <img
                           src={`https://media.themoviedb.org/t/p/w500${serie.backdrop_path}`}
                           alt={serie.title}
-                          className="object-cover w-full h-[25rem]"
+                          className="object-center w-full h-[25rem]"
                         />
                       </Link>
                     ) : (

@@ -67,22 +67,34 @@ const CastAndCrewEpisode = () => {
         </div>
       ) : (
         <div className=" w-full">
-          <div className=" w-full  bg-[#212529] px-10 pt-5 flex justify-center items-center flex-col md:flex-row md:justify-start ">
+          <div className="w-full bg-gradient-to-br from-[#181c23] to-[#23272f] px-6 md:px-10 pt-6 pb-6 flex !items-center flex-col md:flex-row  md:items-start gap-6 rounded-3xl shadow-2xl">
             <img
               src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${seriesDetails.poster_path}`}
               alt="logo"
-              className="rounded-2xl mb-5 w-[30%] md:w-[12%]"
+              className="rounded-2xl mb-4 md:mb-0 w-[60%] max-w-[220px] md:w-[140px] shadow-lg object-cover border-4 border-[#23272f] bg-[#23272f]"
             />
-
-            <div className="w-full flex  flex-col    px-0  md:px-10 ">
-              <h1 className="text-white font-bold  text-3xl text-center md:text-start">
+            <div className="flex-1 flex flex-col  md:justify-start">
+              <h1 className="text-white font-bold text-3xl text-center md:text-start mb-2">
                 {seriesDetails.name}
               </h1>
-              <div className="my-5 flex justify-center items-center md:justify-start">
+              <div className="flex flex-wrap gap-3 justify-center md:justify-start mb-4 animate-bounce">
+                <span className="bg-[#0DCAF0] text-black px-3 py-1 rounded-full font-semibold text-sm shadow">
+                  {seriesDetails.first_air_date?.slice(0, 4)}
+                </span>
+                <span className="bg-[#23272f] text-[#0DCAF0] px-3 py-1 rounded-full font-semibold text-sm shadow border border-[#0DCAF0]">
+                  {seriesDetails.original_language?.toUpperCase()}
+                </span>
+                <span className="bg-[#23272f] text-white px-3 py-1 rounded-full font-semibold text-sm shadow border border-[#23272f]">
+                  {seriesDetails.vote_average
+                    ? `⭐ ${seriesDetails.vote_average}`
+                    : "N/A"}
+                </span>
+              </div>
+              <div className="flex justify-center md:justify-start">
                 <Button
                   onClick={backAstep}
                   variant="outlined"
-                  className=" border-[#0DCAF0]  text-[#0DCAF0] hover:bg-[#0DCAF0] hover:text-black"
+                  className="border-[#0DCAF0] text-[#0DCAF0] hover:bg-[#0DCAF0] hover:text-black"
                 >
                   Back a step
                 </Button>
