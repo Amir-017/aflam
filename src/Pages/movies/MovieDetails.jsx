@@ -625,10 +625,10 @@ const MovieDetails = () => {
                   <TabPanel value="videos">
                     <div className="flex flex-wrap gap-6 justify-center mt-6">
                       {videoMovie &&
-                        videoMovie.slice(0, 6).map((movie, i) => (
+                        videoMovie.slice(0, 3).map((movie, i) => (
                           <div
                             key={i}
-                            className="rounded-2xl overflow-hidden shadow-lg bg-black/40"
+                            className=" overflow-hidden shadow-lg bg-black/40"
                           >
                             <iframe
                               width="320"
@@ -639,12 +639,12 @@ const MovieDetails = () => {
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                               referrerPolicy="strict-origin-when-cross-origin"
                               allowFullScreen
-                              className="rounded-2xl"
+                              className=""
                             ></iframe>
                           </div>
                         ))}
                     </div>
-                    {videoMovie && videoMovie.length > 6 && (
+                    {videoMovie && videoMovie.length > 3 && (
                       <div className="mt-4 text-center">
                         <Link
                           to={`/movieDetails/${idMovie}/title/${nameMovie}/vid`}

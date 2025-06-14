@@ -702,7 +702,7 @@ const DetailsSeries = () => {
                   <TabPanel value="videos">
                     <div className="flex flex-wrap gap-6 justify-center mt-6">
                       {videoSeries &&
-                        videoSeries.slice(0, 6).map((serie, i) => (
+                        videoSeries.slice(0, 3).map((serie, i) => (
                           <div
                             key={i}
                             className="rounded-2xl overflow-hidden shadow-lg bg-black/40"
@@ -721,7 +721,7 @@ const DetailsSeries = () => {
                           </div>
                         ))}
                     </div>
-                    {videoSeries && videoSeries.length > 6 && (
+                    {videoSeries && videoSeries.length > 3 && (
                       <div className="mt-4 text-center">
                         <Link
                           to={`/Detailsseries/${idSeries}/title/${nameSeries}/vid`}
