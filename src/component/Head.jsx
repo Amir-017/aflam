@@ -68,7 +68,7 @@ const Head = () => {
   );
 
   return (
-    <header className="sticky top-0 z-50 bg-transparent ">
+    <header className="md:sticky top-0 z-50 bg-transparent ">
       {/* Search & Switch Buttons OUTSIDE Navbar */}
       <div className="container mx-auto flex flex-col items-center justify-center py-4">
         <div className="flex flex-col md:flex-row items-center gap-3 w-full md:w-[600px]">
