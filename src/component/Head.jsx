@@ -38,13 +38,6 @@ const Head = () => {
     dispatch(getSearchSeries(e.target.value));
   };
 
-  useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 660 && setOpenNav(false)
-    );
-  }, []);
-
   const navList = (
     <ul className="flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-8 justify-center items-center text-center w-full">
       <li>
@@ -144,10 +137,8 @@ const Head = () => {
           </div>
         </div>
       </div>
-      {/* Centered Rounded Navbar - Responsive */}
       <div className="flex justify-center w-full">
         <Navbar className="bg-[#23272f] border border-[#0DCAF0] rounded-2xl shadow-lg px-0 py-0 w-full max-w-2xl flex flex-col items-center">
-          {/* Logo Centered */}
           <div className="w-full flex flex-col items-center justify-center py-3 px-4">
             <Link
               to="/"
@@ -160,9 +151,8 @@ const Head = () => {
                 WATCH<span className="text-[#0DCAF0]">WORLD</span>
               </span>
             </Link>
-            {/* Nav List Centered - Only One Instance */}
+
             <div className="w-full flex justify-center items-center mt-2">
-              {/* Desktop Nav */}
               <div className="hidden lg:flex w-full justify-center">
                 {navList}
               </div>

@@ -10,11 +10,10 @@ import ShowMoreText from "react-show-more-text";
 import { FaStar } from "react-icons/fa";
 
 const ReviewSeries = () => {
-  const { idseries, nameSeries } = useParams();
+  const { idseries } = useParams();
 
   const {
     seriesDetails,
-    seriesHomeLoading,
     seriesDetails: { genres },
 
     //

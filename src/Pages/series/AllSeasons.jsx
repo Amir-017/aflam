@@ -3,7 +3,7 @@ import { getSeriesDetails } from "../../SystmeRdx/Slices/seriesSlices/homeSeries
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
-import { Card, CardHeader, CardBody } from "@material-tailwind/react";
+import { Card, CardBody } from "@material-tailwind/react";
 import { FaStar } from "react-icons/fa";
 import ShowMoreText from "react-show-more-text";
 import fakeImg from "../../Photos/avatar-black-and-white-clipart-7.jpg";

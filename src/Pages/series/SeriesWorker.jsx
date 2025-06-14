@@ -10,7 +10,7 @@ import { Card, CardHeader, CardBody } from "@material-tailwind/react";
 import img from "../../Photos/th.jpeg";
 
 const SeriesWorker = () => {
-  const { idseries, nameSeries } = useParams();
+  const { idseries } = useParams();
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -34,7 +34,6 @@ const SeriesWorker = () => {
     navigate(-1);
   };
 
-  // const { castShownSeries } = useSelector((state) => state.series);
   return (
     <div className="w-full">
       {castAndCrewSeriesLoading ? (

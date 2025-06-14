@@ -18,7 +18,6 @@ import {
 } from "../../SystmeRdx/Slices/moviesSlices/moviesSlice";
 import { Link } from "react-router-dom";
 import fakeImg from "../../Photos/1483382.jpg";
-import { useLocation } from "react-router-dom";
 
 const Movies = () => {
   const { movies, counter, checkCount, moviesLoading } = useSelector(
