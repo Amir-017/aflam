@@ -615,7 +615,7 @@ const MovieDetails = () => {
                     value="posters"
                     className="px-4 py-2 rounded-xl font-bold text-[#87cbd9] data-[selected=true]:bg-[#0DCAF0] data-[selected=true]:text-black transition-all"
                   >
-                    Posters{" "}
+                    Postersس{" "}
                     <span className="text-[#0DCAF0]">
                       ({posters?.length || 0})
                     </span>
