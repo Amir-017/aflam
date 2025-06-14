@@ -25,6 +25,9 @@ import AllEpisodes from "./Pages/series/AllEpisodes";
 import CastAndCrewEpisode from "./Pages/series/CastAndCrewEpisode";
 
 const App = () => {
+  if (process.env.NODE_ENV === "production") {
+    console.warn = () => {};
+  }
   return (
     <div className="w-full bg-black">
       <Head />
